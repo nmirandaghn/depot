@@ -3,6 +3,9 @@ require 'test_helper'
 class CartsControllerTest < ActionController::TestCase
   setup do
     @cart = carts(:one)
+
+    @p1 = products(:ruby)
+    @p2 = products(:sap)
   end
 
   test "should get index" do
@@ -46,5 +49,13 @@ class CartsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to store_path
+  end
+
+  test "should calculate ok" do
+    @cart.add_product(@p1.id, @p1.price)
+    @cart.add_product(@p2.id, @p1.price)
+
+    assert_equal(@cart.line_items.size, 2)
+    assert_equal(@cart.total_price, 129.49)
   end
 end

@@ -53,7 +53,7 @@ class CartsControllerTest < ActionController::TestCase
 
   test "should calculate ok" do
     @cart.add_product(@p1.id, @p1.price)
-    @cart.add_product(@p2.id, @p1.price)
+    @cart.add_product(@p2.id, @p2.price)
 
     assert_equal(@cart.line_items.size, 2)
     assert_equal(@cart.total_price, 129.49)
